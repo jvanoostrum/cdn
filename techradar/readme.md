@@ -1,1 +1,1 @@
-CDN release of the Techradar minified javascript and css files
+Minified source of javascript and css files for release
