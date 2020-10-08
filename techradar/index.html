@@ -45,7 +45,9 @@
               var zq = params.has('zq') ? params.get('zq') : undefined;
               function removeClass(id, name){
                 var element = document.getElementById(id);
-                element.classList.remove(name);
+                if(typeof element.classList !== "undefined"){
+                    element.classList.remove(name);
+                }
               }
               removeClass(zq,'hidden');    
             }
