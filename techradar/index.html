@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>JvanOostrum CDN</title>
+        <link rel="stylesheet" href="radar.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="radar.min.js"></script> -->
+    </head>
+    <body>
+        <svg id="radar" class="radar"></svg>
+
+        <script type="module">
+            import gsheet_loader from './gsheet_loader.min.js';
+          
+            const params = new URLSearchParams(window.location.search);
+            show_content();
+          
+            var loader = new gsheet_loader({
+              onload: load_visualization,
+              url: 'https://docs.google.com/spreadsheets/d/16L7qYTzev8__RwZrddDDdvOA_O-0acixfXn8FJvfTVE/gviz/tq'
+            }).load();  
+          
+            function load_visualization(data) {  
+              radar_visualization({ 
+                svg_id: "radar",
+                width: 500,
+                height: 500,
+                zoomed_quadrant: params.has('zq') ? params.get('zq') : undefined,
+                show_overlay: params.has('so') ? params.get('so') : true,
+                show_arc_texts: params.has('sat') ? params.get('sat') : true,
+                blip_factor: params.has('sat') ? params.get('sat') : 1.25,
+                colors: {
+                  background: "#fff",
+                  grid: "#bbb",
+                  inactive: "#ddd"
+                },
+                title: data[0]["title"],
+                entries: data[1],
+                quadrants: data[2],
+                rings: data[3]    
+              });
+            }
+          
+            function show_content(){
+              var zq = params.has('zq') ? params.get('zq') : undefined;
+              function removeClass(id, name){
+                var element = document.getElementById(id);
+                element.classList.remove(name);
+              }
+              removeClass(zq,'hidden');    
+            }
+          
+        </script>        
+    </body>
+</html>
