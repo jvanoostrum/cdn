@@ -17,7 +17,7 @@
           
             var loader = new gsheet_loader({
               onload: load_visualization,
-              url: 'https://docs.google.com/spreadsheets/d/16L7qYTzev8__RwZrddDDdvOA_O-0acixfXn8FJvfTVE/gviz/tq'
+              url: params.has('url') ? params.get('url') : 'https://docs.google.com/spreadsheets/d/16L7qYTzev8__RwZrddDDdvOA_O-0acixfXn8FJvfTVE/gviz/tq'
             }).load();  
           
             function load_visualization(data) {  
